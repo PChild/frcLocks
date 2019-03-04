@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="FRC District Championship Locks">
+  <meta name="author" content="pchild">
+
+  <title>FRC District Championship Locks</title>
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.13.5/dist/bootstrap-table.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.13.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 2rem;
+    }
+    
+    .general {
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">FRC Locks</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#districtSelectContainer">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="districtSelectContainer">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">District</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="#">Chesapeake</a>
+            <a class="dropdown-item" href="#">Indiana</a>
+            <a class="dropdown-item" href="#">Israel</a>
+            <a class="dropdown-item" href="#">Michigan</a>
+            <a class="dropdown-item" href="#">Mid-Atlantic</a>
+            <a class="dropdown-item" href="#">New England</a>
+            <a class="dropdown-item" href="#">North Carolina</a>
+            <a class="dropdown-item" href="#">Ontario</a>
+            <a class="dropdown-item" href="#">Peachtree</a>
+            <a class="dropdown-item" href="#">Pacific Northwest</a>
+            <a class="dropdown-item" href="#">Texas</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main role="main" class="container">
+
+    <div class="general">
+      <h1><i>FIRST</i> Mid-Atlantic District</h1>
+      <table id="statisticsTable"></table>
+      <br>
+      <table id="eventsTable"></table>
+      <br>
+      <table id="ranksTable" data-row-style="rowStyler"></table>
+    </div>
+
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.13.5/dist/bootstrap-table.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-table@1.13.5/dist/extensions/sticky-header/bootstrap-table-sticky-header.min.js"></script>
+
+  <script>
+    let eventStatusMap = {
+      0: "Pre-Event",
+      1: "Qualifications",
+      2: "Eliminations",
+      3: "Awards",
+      7: "Complete"
+    }
+
+    let statisticsData = []
+    let eventsData = []
+    let ranksData = []
+    let test = {}
+
+    $.getJSON("https://cors-anywhere.herokuapp.com/https://frclocks.com/raw.php?d=fma", function (result) {
+      test = result;
+      console.log("data fetched")
+
+      //Organize district statistics data and load into table
+      statisticsData = [{
+        label: 'District Points Remaining',
+        value: result.points_remaining,
+        color: "FFD966"
+      }, {
+        label: 'District Champs Slots',
+        value: result.dcmp_slots,
+        color: "FFD966"
+      }]
+      $('#statisticsTable').bootstrapTable("load", statisticsData);
+
+      //Events table data and loading
+      $.each(result["events"], function (idx, item) {
+        eventsData.push({
+          name: '<u><a href="http://thebluealliance.com/event/' + item.key + '">' + item.name + '</a></u>',
+          status: eventStatusMap[item.progress],
+          teamCount: item.teams.length,
+          ptsLeft: item.points_remaining.total,
+          color: item.color
+        })
+      })
+      $('#eventsTable').bootstrapTable("load", eventsData);
+
+      //Ranks data and loading to table
+      $.each(result["rankings"], function (idx, item) {
+        ranksData.push({
+          rank: item.rank,
+          team: '<u><a href="http://www.thebluealliance.com/team/' + item.team_number + '">' + item.team_number + '</a></u>',
+          event1: item.event_points[0].total,
+          event2: item.event_points[1].total,
+          ageBonus: item.rookie_bonus,
+          total: item.point_total,
+          lockPercent: item.lock_percent,
+          color: item.color
+        })
+      })
+      $('#ranksTable').bootstrapTable("load", ranksData);
+
+    })
+
+    $('#eventsTable').bootstrapTable({
+      columns: [{
+        field: 'name',
+        title: 'Event'
+  }, {
+        field: 'status',
+        title: 'Status'
+  }, {
+        field: 'teamCount',
+        title: '# Teams'
+  }, {
+        field: 'ptsLeft',
+        title: 'Pts Avail'
+  }, ],
+      data: eventsData,
+      formatNoMatches: noMatches,
+      rowStyle: rowStyler,
+      theadClasses: 'thead-dark',
+      classes: 'table table-bordered table-sm'
+    })
+
+    $('#statisticsTable').bootstrapTable({
+      columns: [{
+        field: 'label',
+        title: 'Statistic'
+  }, {
+        field: 'value',
+        title: 'Value'
+  }, ],
+      data: statisticsData,
+      formatNoMatches: noMatches,
+      rowStyle: rowStyler,
+      theadClasses: 'thead-dark',
+      classes: 'table table-bordered table-sm'
+    })
+
+    $('#ranksTable').bootstrapTable({
+      columns: [{
+        field: 'rank',
+        title: 'Rank'
+}, {
+        field: 'team',
+        title: 'Team'
+}, {
+        field: 'event1',
+        title: 'Event 1'
+}, {
+        field: 'event2',
+        title: 'Event 2'
+}, {
+        field: 'ageBonus',
+        title: 'Age Bonus'
+}, {
+        field: 'total',
+        title: 'Total'
+}, {
+        field: 'lockPercent',
+        title: 'Lock %'
+}, ],
+      data: ranksData,
+      formatNoMatches: noMatches,
+      rowStyle: rowStyler,
+      theadClasses: 'thead-dark',
+      classes: 'table table-bordered table-sm',
+      stickyHeader: true,
+      stickyHeaderOffsetY: 55
+    });
+
+    function noMatches() {
+      return 'Loading data...';
+    }
+
+    function rowStyler(row, index) {
+      return {
+        css: {
+          background: "#" + row.color,
+          border: "1px solid black"
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
