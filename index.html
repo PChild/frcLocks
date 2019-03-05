@@ -1,5 +1,5 @@
 <!doctype html>
-  <html lang="en">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -21,6 +21,7 @@
       padding: 3rem 1.5rem;
       text-align: center;
     }
+
   </style>
 </head>
 
@@ -161,6 +162,7 @@
         $.each(result["rankings"], function(idx, item) {
           ranksData.push({
             rank: item.rank,
+            teamNum: item.team_number,
             team: '<u><a href="http://www.thebluealliance.com/team/' + item.team_number + '">' + item.team_number + '</a></u>',
             event1: item.event_points[0].total,
             event2: item.event_points[1].total,
@@ -214,25 +216,33 @@
     $('#ranksTable').bootstrapTable({
       columns: [{
         field: 'rank',
-        title: 'Rank'
+        title: 'Rank',
+        sortable: true
       }, {
         field: 'team',
-        title: 'Team'
+        title: 'Team',
+        sortable: true,
+        sortName: 'teamNum'
       }, {
         field: 'event1',
-        title: 'Event 1'
+        title: 'Event 1',
+        sortable: true
       }, {
         field: 'event2',
-        title: 'Event 2'
+        title: 'Event 2',
+        sortable: true
       }, {
         field: 'ageBonus',
-        title: 'Age Bonus'
+        title: 'Age Bonus',
+        sortable: true
       }, {
         field: 'total',
-        title: 'Total'
+        title: 'Total',
+        sortable: true
       }, {
         field: 'lockPercent',
-        title: 'Lock %'
+        title: 'Lock %',
+        sortable: true
       }, ],
       data: ranksData,
       formatNoMatches: noMatches,
@@ -301,6 +311,7 @@
 
     $(document).ready(pageHandlder);
     $(window).on('hashchange', pageHandlder);
+
   </script>
 </body>
 
