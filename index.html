@@ -47,6 +47,12 @@
         padding: 1rem 5px;
       }
     }
+
+    @media (max-width: 991px) {
+      .navbar-nav li a {
+        font-size: large;
+      }
+    }
   </style>
 </head>
 
@@ -310,6 +316,7 @@
 
     function handleInvalid() {
       history.pushState(null, null, "#about");
+      $(window.location.hash).addClass('active');
       $('#distView').hide();
     }
 
