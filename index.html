@@ -16,43 +16,85 @@
     body {
       padding-top: 2rem;
     }
-
+    
     .general {
-      padding: 3rem 1.5rem;
+      padding: 2rem;
       text-align: center;
     }
-
+    
+    table a {
+      color: darkblue;
+    }
+    
+    .navbar-nav li a {
+      border: 1px solid grey;
+      border-radius: 5px;
+      margin: 1px 2px 1px 2px;
+      padding: 5px;
+      font-size: small;
+    }
+    
+    .nav-link.active {
+      border-color: white;
+    }
+    
+    @media (max-width: 767.98px) {
+      .container {
+        padding: 0;
+        margin: 0;
+      }
+      .general {
+        padding: 1rem 5px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">FRC Locks</a>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="padding: 5px 0 5px 5px; margin: 0px">
+    <a class="navbar-brand" href="#" style="padding: 0; margin: 0 5px 0 0;">FRC Locks</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuContainer">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="menuContainer">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown" id="distHolder">
-          <a class="nav-link dropdown-toggle" href="#" id="distDropdown" data-toggle="dropdown">District</a>
-          <div class="dropdown-menu" aria-labelledby="distDropdown">
-            <a class="dropdown-item" href="#chs" id="chs">Chesapeake</a>
-            <a class="dropdown-item" href="#in" id="in">Indiana</a>
-            <a class="dropdown-item" href="#isr" id="isr">Israel</a>
-            <a class="dropdown-item" href="#fim" id="fim">Michigan</a>
-            <a class="dropdown-item" href="#fma" id="fma">Mid-Atlantic</a>
-            <a class="dropdown-item" href="#ne" id="ne">New England</a>
-            <a class="dropdown-item" href="#fnc" id="fnc">North Carolina</a>
-            <a class="dropdown-item" href="#ont" id="ont">Ontario</a>
-            <a class="dropdown-item" href="#pch" id="pch">Peachtree</a>
-            <a class="dropdown-item" href="#pnw" id="pnw">Pacific Northwest</a>
-            <a class="dropdown-item" href="#tx" id="tx">Texas</a>
-          </div>
+      <ul class="navbar-nav d-flex mx-auto flex-fill align-items-stretch">
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#about" id="about">About</a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" href="#about">About</a>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#chs" id="chs">Chesapeake</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#in" id="in">Indiana</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#isr" id="isr">Israel</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#fim" id="fim">Michigan</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#fma" id="fma">Mid-Atlantic</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#ne" id="ne">New England</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#fnc" id="fnc">North Carolina</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#ont" id="ont">Ontario</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#pch" id="pch">Peachtree</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#pnw" id="pnw">Pacific Northwest</a>
+        </li>
+        <li class="nav-item flex-fill text-center">
+          <a class="nav-link" href="#tx" id="tx">Texas</a>
         </li>
       </ul>
     </div>
@@ -71,10 +113,10 @@
 
     <div class="general" id="aboutView">
       <p style="text-align: left">The purpose of FRClocks, for those new to districts or new to FIRST, is to calculate who is mathematically locked into their district championship ahead of district play ending. Its something to follow and keep an eye on as the competition weeks wind down to see where your team sits. You can see it in action <a href="https://youtu.be/rZHWbRdVGfQ?t=583"><u>here</u></a> thanks to Shawn Lim featuring it on his Ask the Experts webinar a few years back.
-        <br><br>
-        Teams shown in Yellow are still in the hunt for a spot at district champs. Teams shown in Green have clinched their way in on points. Teams shown in blue have won a chairman’s award which guarantees them a spot at district champs. Teams shown in red have been eliminated.
-        <br><br>
-        FRClocks will update “live” every 10 minutes during events! You can track how many points your team has earned and where they sit in the rankings and your lock status live as you compete. The event table near the top will update with the event status such as “Qualifications”, “Alliance Selections”, “Semi-Finals”, ect.</p>
+        <br>
+        <br> Teams shown in Yellow are still in the hunt for a spot at district champs. Teams shown in Green have clinched their way in on points. Teams shown in blue have won a chairman’s award which guarantees them a spot at district champs. Teams shown in red have been eliminated.
+        <br>
+        <br> FRClocks will update “live” every 10 minutes during events! You can track how many points your team has earned and where they sit in the rankings and your lock status live as you compete. The event table near the top will update with the event status such as “Qualifications”, “Alliance Selections”, “Semi-Finals”, ect.</p>
       <h4>
         Written by <a href="https://www.chiefdelphi.com/u/brandon_l/">Brandon Liatys</a> / <a href="https://www.thebluealliance.com/team/2108">FRC 2180</a>
         <br>
@@ -132,7 +174,7 @@
     }
 
     function updateDistrict(dist) {
-      $.getJSON("https://cors-anywhere.herokuapp.com/https://frclocks.com/raw.php?d=" + dist, function(result) {
+      $.getJSON("https://cors-anywhere.herokuapp.com/https://frclocks.com/raw.php?d=" + dist, function (result) {
 
         //Organize district statistics data and load into table
         statisticsData = [{
@@ -147,7 +189,7 @@
         $('#statisticsTable').bootstrapTable("load", statisticsData);
 
         //Events table data and loading
-        $.each(result["events"], function(idx, item) {
+        $.each(result["events"], function (idx, item) {
           eventsData.push({
             name: '<u><a href="http://thebluealliance.com/event/' + item.key + '">' + item.name + '</a></u>',
             status: eventStatusMap[item.progress],
@@ -159,7 +201,7 @@
         $('#eventsTable').bootstrapTable("load", eventsData);
 
         //Ranks data and loading to table
-        $.each(result["rankings"], function(idx, item) {
+        $.each(result["rankings"], function (idx, item) {
           ranksData.push({
             rank: item.rank,
             teamNum: item.team_number,
@@ -250,7 +292,7 @@
       theadClasses: 'thead-dark',
       classes: 'table table-bordered table-sm',
       stickyHeader: true,
-      stickyHeaderOffsetY: 55
+      stickyHeaderOffsetY: 40
     });
 
     function noMatches() {
@@ -297,8 +339,6 @@
         } else {
           $('#aboutView').hide();
           $('#distView').show();
-
-          $('#distHolder').addClass('active');
           $('#distName')[0].innerHTML = distNamesMap[hashText];
           blankData();
           updateDistrict(hashText);
@@ -309,9 +349,30 @@
 
     }
 
+    function mobileHandler() {
+      if ($(window).width() < 992) {
+        $('#ranksTable').bootstrapTable("hideColumn", "event1");
+        $('#ranksTable').bootstrapTable("hideColumn", "event2");
+        $('#ranksTable').bootstrapTable("hideColumn", "ageBonus");
+      } else {
+        $('#ranksTable').bootstrapTable("showColumn", "event1");
+        $('#ranksTable').bootstrapTable("showColumn", "event2");
+        $('#ranksTable').bootstrapTable("showColumn", "ageBonus");
+      }
+    }
+
+    //Register page handler listeners
     $(document).ready(pageHandlder);
     $(window).on('hashchange', pageHandlder);
 
+    //Register resize handler
+    $(document).ready(mobileHandler);
+    $(window).resize(mobileHandler);
+
+    //Make the menu auto close on click on mobile
+    $('.navbar-nav>li>a').on('click', function () {
+      $('.navbar-collapse').collapse('hide');
+    });
   </script>
 </body>
 
