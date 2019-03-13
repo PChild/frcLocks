@@ -416,7 +416,7 @@
     $(window).resize(mobileHandler);
 
     //Make the menu auto close on click on mobile
-    $('.navbar-nav>li>a').on('click', function () {
+    $(document).on('click', function () {
       $('.navbar-collapse').collapse('hide');
     });
   </script>
